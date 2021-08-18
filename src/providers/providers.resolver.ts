@@ -9,15 +9,15 @@ export class ProvidersResolver {
   constructor(private readonly providersService: ProvidersService) {}
 
   @Mutation(() => Provider)
-  createProvider(
-    @Args('createProviderInput') createProviderInput: CreateProviderInput,
-  ) {
-    return this.providersService.create(createProviderInput);
+  async createProvider(
+    @Args('data') data: CreateProviderInput,
+  ): Promise<Provider> {
+    return await this.providersService.create(data);
   }
 
   @Query(() => [Provider], { name: 'providers' })
-  findAll() {
-    return this.providersService.findAll();
+  async findAll(): Promise<Provider[]> {
+    return await this.providersService.findAll();
   }
 
   @Query(() => Provider, { name: 'provider' })

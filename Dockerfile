@@ -2,6 +2,8 @@
 FROM node:15.2.0-alpine3.12
 #Instalar o bash
 RUN apk add --no-cache bash
+
+RUN npm install --global yarn
 #Instalar cli nest
 RUN npm i -g @nestjs/cli@8.0.0
 
