@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    entrypoint: dockerize -wait tcp://db:5432 -timeout 40s ./.docker/entrypoint.sh
+    container_name: api-aloBaterias
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/app
+    depends_on: 
+    - db
+
+  db:
+    build: .docker/postgres
+    container_name: db-aloBaterias
+    restart: always
+    tty: true
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=store
+    volumes:
+      - .docker/dbdata:/var/lib/postgresql/data
+
+  

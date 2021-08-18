@@ -1,0 +1,32 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Provider {
+  id: ID!
+  name: String!
+  email: String!
+  cpf: String!
+}
+
+type Query {
+  providers: [Provider!]!
+  provider(id: Int!): Provider!
+}
+
+type Mutation {
+  createProvider(createProviderInput: CreateProviderInput!): Provider!
+  updateProvider(updateProviderInput: UpdateProviderInput!): Provider!
+  removeProvider(id: Int!): Provider!
+}
+
+input CreateProviderInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateProviderInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
