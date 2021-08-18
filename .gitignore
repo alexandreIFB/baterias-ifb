@@ -2,7 +2,8 @@
 /dist
 /node_modules
 
-/.docker/dbdata
+.history/
+.docker/dbdata
 
 # Logs
 logs
