@@ -4,7 +4,6 @@ import {
 } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { execute } from 'graphql';
 import { TestUtil } from './../common/test/TestUtil';
 import { Provider } from './entities/provider.entity';
 import { ProvidersService } from './providers.service';
