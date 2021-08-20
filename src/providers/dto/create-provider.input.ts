@@ -1,5 +1,12 @@
 import { InputType } from '@nestjs/graphql';
-import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsDate,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 @InputType()
 export class CreateProviderInput {
@@ -21,4 +28,12 @@ export class CreateProviderInput {
 
   @IsBoolean()
   isSeller: boolean;
+
+  @IsNotEmpty({ message: 'Data de aniversario não pode ser nulo' })
+  @IsDate()
+  birthDate: Date;
+
+  @IsDate()
+  @IsOptional()
+  startDate?: Date;
 }

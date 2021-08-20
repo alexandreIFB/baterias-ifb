@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProviderInput } from './dto/create-provider.input';
@@ -13,7 +17,7 @@ export class ProvidersService {
   ) {}
 
   async create(data: CreateProviderInput): Promise<Provider> {
-    const provider = await this.providerRepository.create(data);
+    const provider = this.providerRepository.create(data);
     const providerSaved = await this.providerRepository.save(provider);
 
     if (!providerSaved) {
@@ -29,16 +33,32 @@ export class ProvidersService {
     return await this.providerRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} provider`;
+  async findOneById(id: number): Promise<Provider> {
+    const provider = await this.providerRepository.findOne(id);
+    if (!provider) {
+      throw new NotFoundException('Funcionario com esse id não encontrado');
+    }
+    return provider;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  update(id: number, updateProviderInput: UpdateProviderInput) {
-    return `This action updates a #${id} provider`;
+  async update(id: number, data: UpdateProviderInput) {
+    const provider = await this.findOneById(id);
+
+    await this.providerRepository.update(id, { ...data });
+
+    const providerUpdated = this.providerRepository.create({
+      ...provider,
+      ...data,
+    });
+
+    return providerUpdated;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} provider`;
+  async remove(id: number): Promise<boolean> {
+    await this.findOneById(id);
+
+    const deleted = await this.providerRepository.delete(id);
+
+    return deleted ? true : false;
   }
 }

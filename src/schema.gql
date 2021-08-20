@@ -9,6 +9,8 @@ type Provider {
   cpf: String!
   password: String!
   isSeller: Boolean!
+  startDate: DateTime!
+  birthDate: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -25,8 +27,8 @@ type Query {
 
 type Mutation {
   createProvider(data: CreateProviderInput!): Provider!
-  updateProvider(updateProviderInput: UpdateProviderInput!): Provider!
-  removeProvider(id: Int!): Provider!
+  updateProvider(data: UpdateProviderInput!, id: Float!): Provider!
+  removeProvider(id: Int!): Boolean!
 }
 
 input CreateProviderInput {
@@ -35,6 +37,8 @@ input CreateProviderInput {
   cpf: String!
   password: String!
   isSeller: Boolean!
+  birthDate: DateTime!
+  startDate: DateTime
 }
 
 input UpdateProviderInput {
@@ -43,5 +47,6 @@ input UpdateProviderInput {
   cpf: String
   password: String
   isSeller: Boolean
-  id: Int!
+  birthDate: DateTime
+  startDate: DateTime
 }

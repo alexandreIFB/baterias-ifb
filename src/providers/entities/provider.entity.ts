@@ -29,6 +29,12 @@ export class Provider {
   @Column({ default: false, name: 'is_seller' })
   isSeller: boolean;
 
+  @Column({ default: () => 'CURRENT_TIMESTAMP', name: 'start_date' })
+  startDate: Date;
+
+  @Column({ name: 'birth_date' })
+  birthDate: Date;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

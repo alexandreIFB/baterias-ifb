@@ -16,27 +16,25 @@ export class ProvidersResolver {
   }
 
   @Query(() => [Provider], { name: 'providers' })
-  async findAll(): Promise<Provider[]> {
+  async findAll() {
     return await this.providersService.findAll();
   }
 
   @Query(() => Provider, { name: 'provider' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.providersService.findOne(id);
+  async findOneById(@Args('id', { type: () => Int }) id: number) {
+    return await this.providersService.findOneById(id);
   }
 
   @Mutation(() => Provider)
-  updateProvider(
-    @Args('updateProviderInput') updateProviderInput: UpdateProviderInput,
+  async updateProvider(
+    @Args('id') id: number,
+    @Args('data') data: UpdateProviderInput,
   ) {
-    return this.providersService.update(
-      updateProviderInput.id,
-      updateProviderInput,
-    );
+    return await this.providersService.update(id, data);
   }
 
-  @Mutation(() => Provider)
-  removeProvider(@Args('id', { type: () => Int }) id: number) {
-    return this.providersService.remove(id);
+  @Mutation(() => Boolean)
+  async removeProvider(@Args('id', { type: () => Int }) id: number) {
+    return await this.providersService.remove(id);
   }
 }

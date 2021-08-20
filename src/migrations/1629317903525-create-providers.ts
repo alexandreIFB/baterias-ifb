@@ -14,7 +14,6 @@ export class CreateProviders1629317903525 implements MigrationInterface {
       {
         name: 'name',
         type: 'text',
-        isUnique: true,
         isNullable: false,
       },
       {
@@ -38,6 +37,16 @@ export class CreateProviders1629317903525 implements MigrationInterface {
         name: 'is_seller',
         type: 'boolean',
         default: false,
+      },
+      {
+        name: 'birth_date',
+        type: 'date',
+        isNullable: false,
+      },
+      {
+        name: 'start_date',
+        type: 'date',
+        default: 'now()',
       },
       {
         name: 'created_at',
