@@ -2,8 +2,10 @@
 /dist
 /node_modules
 
-#Docker
+
 .history/
+
+#Docker
 /.docker/dbdata
 
 # Logs
